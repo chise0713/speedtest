@@ -1,0 +1,46 @@
+{
+    "inbounds": [
+        {
+            "type": "vmess",
+            "listen": "127.0.0.1",
+            "listen_port": 60000,
+            "users": [
+                {
+                    "uuid": "39180a03-10e3-4533-b000-910ea2e2104c",
+                    "alterId": 0
+                }
+            ],
+            "transport": {
+                "type": "grpc"
+            },
+            "tls": {
+                "enabled": true,
+                "certificate": [
+                    "-----BEGIN CERTIFICATE-----",
+                    "MIIBfzCCASWgAwIBAgIQervBSg0Pt432QdfqCap1NDAKBggqhkjOPQQDAjAmMREw",
+                    "DwYDVQQKEwhYcmF5IEluYzERMA8GA1UEAxMIWHJheSBJbmMwHhcNMjQwMTE0MjMz",
+                    "NTE3WhcNMjQwNDE0MDAzNTE3WjAmMREwDwYDVQQKEwhYcmF5IEluYzERMA8GA1UE",
+                    "AxMIWHJheSBJbmMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATsrzGH+Y5gdd/R",
+                    "C5JKYEMNQJPLj4cNPPALtQwpRCOGgpyMROW8Q0nPD1mVruEDLjpk3T1IoHIOlTGT",
+                    "ZD8YgHWoozUwMzAOBgNVHQ8BAf8EBAMCBaAwEwYDVR0lBAwwCgYIKwYBBQUHAwEw",
+                    "DAYDVR0TAQH/BAIwADAKBggqhkjOPQQDAgNIADBFAiATBq//4sjzUyxJ3yIys9A0",
+                    "t644wMhbRChqndRIGOZKEAIhAM3+fMZvjCDlBTwjWbr+9tFnZ+DaopoPH6Hs+HBF",
+                    "Jus1",
+                    "-----END CERTIFICATE-----"                
+                ],
+                "key": [
+                    "-----BEGIN RSA PRIVATE KEY-----",
+                    "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgwtQVY5VOiQwCWYMP",
+                    "ygsXP3POQ8QMazWgiyP/FWtT1UGhRANCAATsrzGH+Y5gdd/RC5JKYEMNQJPLj4cN",
+                    "PPALtQwpRCOGgpyMROW8Q0nPD1mVruEDLjpk3T1IoHIOlTGTZD8YgHWo",
+                    "-----END RSA PRIVATE KEY-----"
+                ]
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "direct"
+        }
+    ]
+}

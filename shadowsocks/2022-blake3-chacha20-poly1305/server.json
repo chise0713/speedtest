@@ -1,0 +1,16 @@
+{
+    "inbounds": [
+        {
+            "type": "shadowsocks",
+            "listen": "127.0.0.1",
+            "listen_port": 60000,
+            "method": "2022-blake3-chacha20-poly1305",
+            "password": "RCQE2bs4fPehWjaH1jZ2tKk/KGHmxq2YCiuqTrmx4Zo="
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "direct"
+        }
+    ]
+}

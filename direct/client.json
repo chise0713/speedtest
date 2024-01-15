@@ -1,0 +1,15 @@
+{
+    "inbounds": [
+        {
+            "type": "direct",
+            "listen": "127.0.0.1",
+            "listen_port": 5201,
+            "override_port": 5202
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "direct"
+        }
+    ]
+}

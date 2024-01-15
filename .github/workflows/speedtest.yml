@@ -1,0 +1,314 @@
+name: Test protocals' speed
+
+on:  
+  workflow_dispatch:
+
+jobs:
+  prepare:
+    name: Fetch and save cache
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Check out code into directory
+      uses: actions/checkout@v4
+
+    - name: Git config
+      run: |
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config user.name "github-actions[bot]"
+        git fetch --unshallow
+      shell: bash
+
+    - name: Save Cache
+      uses: actions/cache/save@v3
+      with:
+        path: ./
+        key: restore-${{ github.sha }}-${{ github.run_number }}
+
+  test:
+    needs: prepare
+    name: Test
+    strategy:
+      matrix:
+        include:
+          - protocal: direct
+          - protocal: tuic
+          - protocal: hysteria
+          - protocal: hysteria2
+          # START SHADOWSOCKS
+          - protocol: shadowsocks
+            method: none
+          - protocol: shadowsocks
+            method: 2022-blake3-aes-128-gcm
+          - protocol: shadowsocks
+            method: 2022-blake3-aes-256-gcm
+          - protocol: shadowsocks
+            method: 2022-blake3-chacha20-poly1305
+          # FIN
+          # START VMESS
+          - protocol: vmess
+            method: none
+            transport: none
+            tls: true
+          - protocol: vmess
+            method: none
+            transport: none
+            tls: false
+          - protocol: vmess
+            method: zero
+            transport: none
+            tls: true
+          - protocol: vmess
+            method: zero
+            transport: none
+            tls: false
+          - protocol: vmess
+            method: aes-128-gcm
+            transport: none
+            tls: true
+          - protocol: vmess
+            method: aes-128-gcm
+            transport: none
+            tls: false
+          - protocol: vmess
+            method: chacha20-poly1305
+            transport: none
+            tls: true
+          - protocol: vmess
+            method: chacha20-poly1305
+            transport: none
+            tls: false
+          - protocol: vmess
+            method: none
+            transport: ws
+            tls: true
+          - protocol: vmess
+            method: none
+            transport: ws
+            tls: false
+          - protocol: vmess
+            method: zero
+            transport: ws
+            tls: true
+          - protocol: vmess
+            method: zero
+            transport: ws
+            tls: false
+          - protocol: vmess
+            method: aes-128-gcm
+            transport: ws
+            tls: true
+          - protocol: vmess
+            method: aes-128-gcm
+            transport: ws
+            tls: false
+          - protocol: vmess
+            method: chacha20-poly1305
+            transport: ws
+            tls: true
+          - protocol: vmess
+            method: chacha20-poly1305
+            transport: ws
+            tls: false
+          - protocol: vmess
+            method: none
+            transport: http
+            tls: true
+          - protocol: vmess
+            method: none
+            transport: http
+            tls: false
+          - protocol: vmess
+            method: zero
+            transport: http
+            tls: true
+          - protocol: vmess
+            method: zero
+            transport: http
+            tls: false
+          - protocol: vmess
+            method: aes-128-gcm
+            transport: http
+            tls: true
+          - protocol: vmess
+            method: aes-128-gcm
+            transport: http
+            tls: false
+          - protocol: vmess
+            method: chacha20-poly1305
+            transport: http
+            tls: true
+          - protocol: vmess
+            method: chacha20-poly1305
+            transport: http
+            tls: false
+          - protocol: vmess
+            method: none
+            transport: grpc
+            tls: true
+          - protocol: vmess
+            method: none
+            transport: grpc
+            tls: false
+          - protocol: vmess
+            method: zero
+            transport: grpc
+            tls: true
+          - protocol: vmess
+            method: zero
+            transport: grpc
+            tls: false
+          - protocol: vmess
+            method: aes-128-gcm
+            transport: grpc
+            tls: true
+          - protocol: vmess
+            method: aes-128-gcm
+            transport: grpc
+            tls: false
+          - protocol: vmess
+            method: chacha20-poly1305
+            transport: grpc
+            tls: true
+          - protocol: vmess
+            method: chacha20-poly1305
+            transport: grpc
+            tls: false
+          - protocol: vmess
+            method: none
+            transport: httpupgrade
+            tls: true
+          - protocol: vmess
+            method: none
+            transport: httpupgrade
+            tls: false
+          - protocol: vmess
+            method: zero
+            transport: httpupgrade
+            tls: true
+          - protocol: vmess
+            method: zero
+            transport: httpupgrade
+            tls: false
+          - protocol: vmess
+            method: aes-128-gcm
+            transport: httpupgrade
+            tls: true
+          - protocol: vmess
+            method: aes-128-gcm
+            transport: httpupgrade
+            tls: false
+          - protocol: vmess
+            method: chacha20-poly1305
+            transport: httpupgrade
+            tls: true
+          - protocol: vmess
+            method: chacha20-poly1305
+            transport: httpupgrade
+            tls: false
+          # FIN
+          # START VLESS
+          - protocol: vless
+            transport: none
+            tls: true
+          - protocol: vless
+            transport: none
+            tls: false
+          - protocol: vless
+            transport: ws
+            tls: true
+          - protocol: vless
+            transport: ws
+            tls: false
+          - protocol: vless
+            transport: http
+            tls: true
+          - protocol: vless
+            transport: http
+            tls: false
+          - protocol: vless
+            transport: grpc
+            tls: true
+          - protocol: vless
+            transport: grpc
+            tls: false
+          - protocol: vless
+            transport: httpupgrade
+            tls: true
+          - protocol: vless
+            transport: httpupgrade
+            tls: false
+          # FIN
+          # START TROJAN
+          - protocol: trojan
+            transport: none
+            tls: true
+          - protocol: trojan
+            transport: none
+            tls: false
+          - protocol: trojan
+            transport: ws
+            tls: true
+          - protocol: trojan
+            transport: ws
+            tls: false
+          - protocol: trojan
+            transport: http
+            tls: true
+          - protocol: trojan
+            transport: http
+            tls: false
+          - protocol: trojan
+            transport: grpc
+            tls: true
+          - protocol: trojan
+            transport: grpc
+            tls: false
+          - protocol: trojan
+            transport: httpupgrade
+            tls: true
+          - protocol: trojan
+            transport: httpupgrade
+            tls: false
+          # FIN
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore Cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ./
+          key: restore-
+
+      - name: Get latest sing-box version
+        run: |
+          SING=$(curl https://api.github.com/repos/SagerNet/sing-box/releases | grep -oP "sing-box-\d+\.\d+\.\d+-linux-amd64"| sort -Vru | head -n 1)
+          SING_VERSION=$(echo $SING | grep -oP "\d+\.\d+\.\d+" )
+          echo "Latest version found: $SING_VERSION"
+          echo "sing-box_version=$SING_VERSION" >> $GITHUB_ENV
+
+      - name: Install sing-box
+        uses: giantswarm/install-binary-action@v1.1.0
+        with:
+          binary: "sing-box"
+          version: "${{ env.sing-box_version }}"
+          download_url: "https://github.com/SagerNet/sing-box/releases/latest/download/sing-box-${{ env.sing-box_version }}-linux-amd64.tar.gz"
+          smoke_test: "${binary} version"
+
+      - name: Install iperf3
+        uses: supplypike/setup-bin@v3
+        with:
+          uri: 'https://github.com/userdocs/iperf3-static/releases/download/3.16/iperf3-amd64'
+          name: 'iperf3'
+          version: '3.16'
+
+      - name: Smoke test iperf3
+        run: iperf3 -v
+
+      - name: Run test script
+        env: 
+          PROTOCAL: "${{ matrix.protocal }}"
+          METHOD: "${{ matrix.method }}"
+          TRANSPORT: "${{ matrix.transport }}"
+          TLS: "${{ matrix.tls }}"
+        run: .github/test.sh

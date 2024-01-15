@@ -1,0 +1,24 @@
+{
+    "inbounds": [
+        {
+            "type": "direct",
+            "listen": "127.0.0.1",
+            "listen_port": 5201,
+            "override_port": 5202
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "tuic",
+            "server": "127.0.0.1",
+            "server_port": 60000,
+            "uuid": "39180a03-10e3-4533-b000-910ea2e2104c",
+            "congestion_control": "bbr",
+            "password": "0721",
+            "tls": {
+                "enabled": true,
+                "insecure": true
+            }
+        }
+    ]
+}

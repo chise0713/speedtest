@@ -1,0 +1,24 @@
+{
+    "inbounds": [
+        {
+            "type": "direct",
+            "listen": "127.0.0.1",
+            "listen_port": 5201,
+            "override_port": 5202
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "hysteria",
+            "server": "127.0.0.1",
+            "server_port": 60000,
+            "up_mbps": 6400,
+            "down_mbps": 6400,
+            "auth_str": "0721",
+            "tls": {
+                "enabled": true,
+                "insecure": true
+            }
+        }
+    ]
+}

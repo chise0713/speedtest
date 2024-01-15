@@ -1,0 +1,25 @@
+{
+    "inbounds": [
+        {
+            "type": "direct",
+            "listen": "127.0.0.1",
+            "listen_port": 5201,
+            "override_port": 5202
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "trojan",
+            "server": "127.0.0.1",
+            "server_port": 60000,
+            "password": "8JCsPssfgS8tiRwiMlhARg==",
+            "transport": {
+                "type": "grpc"
+            },
+            "tls": {
+                "enabled": false,
+                "insecure": true
+            }
+        }
+    ]
+}
