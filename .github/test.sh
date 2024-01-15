@@ -1,5 +1,5 @@
 echo $PATH
-DIRECTORY="$PROTOCAL/$METHOD/$TRANSPORT/$TLS/"
+DIRECTORY="$PROTOCOL/$METHOD/$TRANSPORT/$TLS/"
 cat <<EOF
 ::group::sing-box version
 $(sing-box version)
@@ -7,10 +7,10 @@ $(sing-box version)
 EOF
 sing-box run -c $DIRECTORY/client.json >sing-box_client.log 2>&1 &
 SING_CLIENT_PID=$!
-if [[ "$PROTOCAL" == "vmess" ]];then
-    DIRECTORY="$PROTOCAL/$TRANSPORT/$TLS/"
+if [[ "$PROTOCOL" == "vmess" ]];then
+    DIRECTORY="$PROTOCOL/$TRANSPORT/$TLS/"
 fi
-if [[ "$PROTOCAL" != "direct" ]];then
+if [[ "$PROTOCOL" != "direct" ]];then
     sing-box run -c $DIRECTORY/server.json >sing-box_server.log 2>&1 &
     SING_SERVER_PID=$!
 fi

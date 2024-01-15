@@ -1,4 +1,4 @@
-name: Test protocals' speed
+name: Test protocols' speed
 
 on:  
   workflow_dispatch:
@@ -31,10 +31,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - protocal: direct
-          - protocal: tuic
-          - protocal: hysteria
-          - protocal: hysteria2
+          - protocol: direct
+          - protocol: tuic
+          - protocol: hysteria
+          - protocol: hysteria2
           # START SHADOWSOCKS
           - protocol: shadowsocks
             method: none
@@ -307,7 +307,7 @@ jobs:
 
       - name: Run test script
         env: 
-          PROTOCAL: "${{ matrix.protocal }}"
+          PROTOCOL: "${{ matrix.protocol }}"
           METHOD: "${{ matrix.method }}"
           TRANSPORT: "${{ matrix.transport }}"
           TLS: "${{ matrix.tls }}"
